@@ -1,15 +1,24 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+ZSH_DISABLE_COMPFIX=true
 export PATH=$HOME/.config/yarn/global/node_modules/.bin:$PATH
+export PATH=$HOME/.asdf/installs/rust/1.54.0/bin:$PATH
 export PATH=$HOME/.asdf/installs/nodejs/8.4.0/.npm/bin:$PATH
+export PATH=$HOME/.asdf/shims:$PATH
+source "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
+
+. $(brew --prefix asdf)/asdf.sh
 
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/patrickhereford/.oh-my-zsh
-
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="agnoster"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -90,11 +99,10 @@ export JAVA_HOME="/Library/Java/Home"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias python='python3'
-. $HOME/.asdf/asdf.sh
-
-. $HOME/.asdf/completions/asdf.bash
 
 alias beg="bundle exec guard"
+
+alias tmux="TERM=screen-256color-bce tmux"
 
 # Username.
 # If user is root, then pain it in red. Otherwise, just print in yellow.
@@ -109,7 +117,7 @@ spaceship_user() {
 }
 
 ## Prompt
-PROMPT='%{%f%b%k%}$(build_prompt) '
+PROMPT='%{%f%b%k%}$(build_prompt)$(drink_water) '
 export PATH="/usr/local/opt/openssl/bin:$PATH"
 
 
@@ -129,3 +137,48 @@ export FZF_DEFAULT_OPTS='
 '
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+WATER_TIME=1200 # Set time interval in seconds
+DRINK_WATER_CONF="${DRINK_WATER_CONF:-$HOME/.water}"
+
+drink_water() {
+  # If the file doesn't exist, create it
+  if [ ! -f $DRINK_WATER_CONF ]; then
+    date +%s > $DRINK_WATER_CONF
+  fi
+
+  # Tail is used to remain compatible with the pervious file format
+  next_time=$(($(tail -1 $DRINK_WATER_CONF) + $WATER_TIME))
+
+  if [ $next_time -lt $(date +%s) ]; then
+    echo -n "💧 You're thirsty"
+  fi
+}
+
+not_thirsty() {
+  date +%s > $DRINK_WATER_CONF
+  echo "Water is essential"
+}
+
+next_drink() {
+  next_time=$(($(cat $DRINK_WATER_CONF) + $WATER_TIME))
+  next_date=""
+  # Mac's date command uses a different flag
+  case "$(uname)" in
+    'Darwin')
+      next_date="$(date -r $next_time)"
+      ;;
+    *)
+      next_date="$(date --date="@$next_time")"
+      ;;
+  esac
+
+  echo "Next drink at $next_date"
+}
+export PATH="/usr/local/sbin:$PATH"

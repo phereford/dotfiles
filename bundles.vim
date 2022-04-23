@@ -3,12 +3,11 @@ set rtp+=/usr/local/opt/fzf
 call vundle#begin()
 
 Plugin 'gmarik/vundle'
-Plugin 'altercation/vim-colors-solarized'
 
 " Bundle plugins
+Plugin 'morhetz/gruvbox'
 Plugin 'tomlion/vim-solidity'
 Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'rking/ag.vim'
@@ -27,7 +26,7 @@ Plugin 'nelstrom/vim-textobj-rubyblock'
 Plugin 'w0rp/ale'
 Plugin 'ervandew/supertab'
 Plugin 'jcfaria/Vim-R-plugin'
-Plugin 'mxw/vim-jsx'
+Plugin 'maxmellon/vim-jsx-pretty'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'AndrewRadev/splitjoin.vim'
 Plugin 'junegunn/fzf'
@@ -37,12 +36,12 @@ Plugin 'JuliaEditorSupport/julia-vim'
 Plugin 'kana/vim-textobj-user'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
-Plugin 'kaichen/vim-snipmate-ruby-snippets'
-Plugin 'andyl/vim-snipmate-elixir'
 
 Plugin 'elixir-lang/vim-elixir'
 Plugin 'craigemery/vim-autotag'
+
+Plugin 'rust-lang/rust.vim'
+Plugin 'majutsushi/tagbar'
 
 call vundle#end()
 filetype plugin indent on

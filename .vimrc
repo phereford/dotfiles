@@ -5,9 +5,9 @@ runtime macros/matchit.vim
 
 syntax enable
 set background=dark
-colorscheme solarized
-let g:solarized_termcolors=256
+colorscheme gruvbox
 
+set term=screen-256color
 set guifont=Source\ Code\ Pro:h14
 set number relativenumber
 set ignorecase smartcase
@@ -70,7 +70,7 @@ map <Leader>t :Dispatch rake test TEST=%<CR>
 map <Leader>a :Dispatch rake test<CR>
 
 " Elixir Test Running
-map <Leader>ex :Dispatch mix test<cr>
+map <Leader>ex :Dispatch MIX_ENV=test mix test<cr>
 map <Leader>iex :Dispatch iex -S mix test<cr>
 
 " Git Mappings
@@ -104,7 +104,7 @@ if !exists('g:airline_symbols')
 endif
 
 set laststatus=2               " enable airline even if no splits
-let g:airline_theme='luna'
+let g:airline_theme='gruvbox'
 let g:airline_powerline_fonts = 1
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
@@ -139,3 +139,33 @@ function! s:SignCoverage(file)
 endfunction
 
 map H :call <SID>SignCoverage(expand('%:p'))<cr>
+
+let g:snipMate = { 'snippet_version' : 1 }
+let g:tagbar_type_elixir = {
+    \ 'ctagstype' : 'elixir',
+    \ 'kinds' : [
+        \ 'p:protocols',
+        \ 'm:modules',
+        \ 'e:exceptions',
+        \ 'y:types',
+        \ 'd:delegates',
+        \ 'f:functions',
+        \ 'c:callbacks',
+        \ 'a:macros',
+        \ 't:tests',
+        \ 'i:implementations',
+        \ 'o:operators',
+        \ 'r:records'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 'p' : 'protocol',
+        \ 'm' : 'module'
+    \ },
+    \ 'scope2kind' : {
+        \ 'protocol' : 'p',
+        \ 'module' : 'm'
+    \ },
+    \ 'sort' : 0
+\ }
+
