@@ -1,4 +1,5 @@
 set nocompatible
+set regexpengine=0
 filetype off
 source ~/.dotfiles/bundles.vim
 runtime macros/matchit.vim
@@ -29,6 +30,13 @@ set incsearch
 set hlsearch
 set shell=/bin/bash
 set tags+=gems.tags
+
+au BufRead,BufNewFile *.ex,*.exs set filetype=elixir
+au BufRead,BufNewFile *.eex,*.heex,*.leex,*.sface,*.lexs set filetype=eelixir
+au BufRead,BufNewFile mix.lock set filetype=elixir
+autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
+autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
+
 
 if exists('+colorcolumn')
   set colorcolumn=80
@@ -168,4 +176,15 @@ let g:tagbar_type_elixir = {
     \ },
     \ 'sort' : 0
 \ }
-
+if executable('nextls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'next_ls',
+        \ 'cmd': ["nextls", "--stdio"],
+        \ 'root_uri':{server_info->lsp#utils#path_to_uri(
+        \	lsp#utils#find_nearest_parent_file_directory(
+        \		lsp#utils#get_buffer_path(),
+        \		['mix.exs']
+        \	))},
+        \ 'allowlist': ['elixir'],
+        \ })
+endif

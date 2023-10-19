@@ -8,13 +8,13 @@ fi
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 ZSH_DISABLE_COMPFIX=true
+export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
 export PATH=$HOME/.config/yarn/global/node_modules/.bin:$PATH
 export PATH=$HOME/.asdf/installs/rust/1.54.0/bin:$PATH
 export PATH=$HOME/.asdf/installs/nodejs/8.4.0/.npm/bin:$PATH
 export PATH=$HOME/.asdf/shims:$PATH
 source "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
-
-. $(brew --prefix asdf)/asdf.sh
 
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/patrickhereford/.oh-my-zsh
@@ -101,6 +101,7 @@ export JAVA_HOME="/Library/Java/Home"
 alias python='python3'
 
 alias beg="bundle exec guard"
+alias mtw="fswatch lib test | MIX_ENV=test mix test --listen-on-stdin --stale"
 
 alias tmux="TERM=screen-256color-bce tmux"
 
@@ -181,4 +182,6 @@ next_drink() {
 
   echo "Next drink at $next_date"
 }
-export PATH="/usr/local/sbin:$PATH"
+
+export PATH="$PATH:/Users/patrickhereford/.foundry/bin"
+export PATH="/usr/local/opt/openjdk/bin:$PATH"
