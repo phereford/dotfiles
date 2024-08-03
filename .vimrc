@@ -74,7 +74,7 @@ nmap <Leader>r :Tags<CR>
 map <C-t> <esc>:tabnew<CR>
 
 " Elixir Test mappings
-map <Leader>t :Dispatch MIX_ENV=test mix test TEST=%<CR>
+map <Leader>t :Dispatch MIX_ENV=test mix test %<CR>
 map <Leader>a :Dispatch MIX_ENV=test mix test<CR>
 
 " Git Mappings
