@@ -73,13 +73,9 @@ nmap <Leader>r :Tags<CR>
 " Vim Tab Mappings
 map <C-t> <esc>:tabnew<CR>
 
-" Ruby Test mappings
-map <Leader>t :Dispatch rake test TEST=%<CR>
-map <Leader>a :Dispatch rake test<CR>
-
-" Elixir Test Running
-map <Leader>ex :Dispatch MIX_ENV=test mix test<cr>
-map <Leader>iex :Dispatch iex -S mix test<cr>
+" Elixir Test mappings
+map <Leader>t :Dispatch MIX_ENV=test mix test TEST=%<CR>
+map <Leader>a :Dispatch MIX_ENV=test mix test<CR>
 
 " Git Mappings
 vmap <Leader>gb :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
@@ -87,6 +83,9 @@ map <Leader>gw :!git add . && git commit -m 'WIP' && git push<cr>
 map <Leader>gd :Gdiff<cr>
 map <Leader>gs :Gstatus<cr>
 map <Leader>gc :Gcommit<cr>
+
+" Github Copilot Mappings
+map <Leader>cp :Copilot panel<cr>
 
 " Misc Mappings
 map <Leader>i mmgg=G`m<CR> " Fix Indentations

@@ -15,6 +15,7 @@ export PATH=$HOME/.asdf/installs/rust/1.54.0/bin:$PATH
 export PATH=$HOME/.asdf/installs/nodejs/8.4.0/.npm/bin:$PATH
 export PATH=$HOME/.asdf/shims:$PATH
 source "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
+source "/Users/patrickhereford/.asdf/installs/rust/1.77.1/env"
 
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/patrickhereford/.oh-my-zsh
@@ -185,3 +186,6 @@ next_drink() {
 
 export PATH="$PATH:/Users/patrickhereford/.foundry/bin"
 export PATH="/usr/local/opt/openjdk/bin:$PATH"
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/local/bin/terraform terraform

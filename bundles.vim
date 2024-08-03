@@ -43,6 +43,8 @@ Plugin 'craigemery/vim-autotag'
 Plugin 'rust-lang/rust.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'prabirshrestha/vim-lsp'
+Plugin 'hashivim/vim-terraform'
+Plugin 'github/copilot.vim'
 
 call vundle#end()
 filetype plugin indent on
